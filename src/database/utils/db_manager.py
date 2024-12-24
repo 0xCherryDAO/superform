@@ -39,7 +39,6 @@ class DataBaseUtils:
             self,
             private_key: str,
             proxy: str = None,
-            okx_address: str = None,
             *,
             status: str,
             task_name: str | None = None
@@ -64,7 +63,6 @@ class DataBaseUtils:
                 )
                 if self.table_object is WorkingWallets:
                     transaction.proxy = proxy
-                    transaction.okx_address = okx_address
 
                 if self.table_object is WalletsTasks:
                     transaction.task_name = task_name

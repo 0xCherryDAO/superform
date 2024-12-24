@@ -18,7 +18,6 @@ class WorkingWallets(Base):
     id = Column(Integer, Sequence('working_wallets_id_seq'), primary_key=True)
     private_key = Column(String)
     proxy = Column(String, nullable=True)
-    okx_address = Column(String, nullable=True)
     status = Column(String)
 
 

@@ -210,6 +210,9 @@ class SuperForm(Account, RequestClient):
             headers=self.headers,
             json=route
         )
+        if not response_json:
+            logger.error(f'[{self.wallet_address}] | Withdraw failed. Route not found.')
+            return None, None, None
         to = response_json['to']
         data = response_json['data']
         value = int(response_json['value'])
@@ -225,6 +228,9 @@ class SuperForm(Account, RequestClient):
             return
 
         to, data, value = await self.get_withdraw_data(deposits)
+        if not data:
+            return False
+
         if data == "Empty":
             return True
         tx = {

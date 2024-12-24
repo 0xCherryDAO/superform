@@ -36,6 +36,7 @@ async def process_superform_deposit(private_key: str, proxy: Proxy | None) -> Op
         deposit_config=deposit_settings,
         withdraw_config=None
     )
+    logger.debug(superform)
     deposited = await superform.deposit()
     if deposited:
         return True
@@ -59,6 +60,7 @@ async def process_superform_withdraw(private_key: str, proxy: Proxy | None) -> O
             )
         )
     )
+    logger.debug(superform)
     withdrawn = await superform.withdraw()
     if withdrawn:
         return True

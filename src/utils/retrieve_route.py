@@ -31,7 +31,6 @@ async def get_routes(private_keys: str) -> Optional[List[Route]]:
                         tasks=tasks,
                         wallet=Wallet(
                             private_key=private_key,
-                            recipient_address=wallet.okx_address,
                             proxy=wallet.proxy,
                         )
                     )

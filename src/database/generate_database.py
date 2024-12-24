@@ -19,7 +19,7 @@ async def clear_database(engine) -> None:
     logger.info("База данных очищена.")
 
 
-async def generate_database(engine, private_keys: list[str], recipients: list[str]) -> None:
+async def generate_database(engine, private_keys: list[str]) -> None:
     await clear_database(engine)
     tasks = []
 
@@ -30,18 +30,6 @@ async def generate_database(engine, private_keys: list[str], recipients: list[st
 
     proxy_index = 0
     for private_key in private_keys:
-        with open('wallets.txt', 'r') as file:
-            file_private_keys = [line.strip() for line in file]
-
-        private_key_index = file_private_keys.index(private_key)
-        recipient_address = None
-
-        if DEPOSIT_TO_OKX:
-            if len(private_keys) != len(recipients):
-                logger.error(f'Количество приватных ключей не соответствует количеству адресов получателей')
-                return
-            recipient_address = recipients[private_key_index]
-
         proxy = proxies[proxy_index]
         proxy_index = (proxy_index + 1) % len(proxies)
 
@@ -62,7 +50,6 @@ async def generate_database(engine, private_keys: list[str], recipients: list[st
         await db_utils.add_to_db(
             private_key=private_key,
             proxy=f'{proxy_url}|{change_link}' if MOBILE_PROXY else proxy_url,
-            okx_address=recipient_address,
             status='pending',
         )
         for task in tasks:

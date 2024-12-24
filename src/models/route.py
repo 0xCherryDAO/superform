@@ -10,7 +10,6 @@ from src.utils.proxy_manager import Proxy
 
 class Wallet(BaseModel):
     private_key: str
-    recipient_address: str | None
     proxy: Any = Field(init=False)
 
     @model_validator(mode='before')

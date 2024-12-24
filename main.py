@@ -10,7 +10,7 @@ from loguru import logger
 from src.database.generate_database import generate_database
 from src.database.models import engine, init_models
 from src.models.route import Route
-from src.utils.data.helper import private_keys, recipients, proxies
+from src.utils.data.helper import private_keys, proxies
 from src.utils.manage_tasks import manage_tasks
 from src.utils.retrieve_route import get_routes
 from src.utils.runner import *
@@ -84,7 +84,7 @@ async def main() -> None:
         if SHUFFLE_WALLETS:
             random.shuffle(private_keys)
         logger.debug("Генерация новой базы данных с маршрутами...")
-        await generate_database(engine, private_keys, recipients)
+        await generate_database(engine, private_keys)
     elif module == 2:
         logger.debug("Отработка по базе данных...")
         routes = await get_routes(private_keys)
