@@ -13,5 +13,10 @@ with open('proxies.txt', 'r', encoding='utf-8-sig') as file:
     if not proxies:
         proxies = [None for _ in range(len(private_keys))]
 
+with open('recipients.txt', 'r', encoding='utf-8-sig') as file:
+    recipients = [line.strip() for line in file]
+    if not recipients:
+        recipients = [None for _ in range(len(private_keys))]
+
 print(Fore.BLUE + f'Loaded {len(private_keys)} wallets:')
 print('\033[39m')
