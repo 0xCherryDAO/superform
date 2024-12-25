@@ -5,7 +5,6 @@ import logging
 import sys
 
 from questionary import select, Choice
-from loguru import logger
 
 from src.database.generate_database import generate_database
 from src.database.models import engine, init_models

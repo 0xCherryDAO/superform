@@ -118,7 +118,7 @@ class SuperForm(Account, RequestClient):
                     return
 
                 decimals = await self.get_decimals(self.deposit_config.token.address, self.web3)
-                amount = deposit_token_balance / 10 ** decimals
+                amount = deposit_token_balance / 10 ** decimals * self.deposit_config.deposit_percentage
 
         to, data, value, value_usd = await self.get_deposit_data(amount)
         if self.deposit_config.token.name != 'ETH':
